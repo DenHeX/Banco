@@ -22,8 +22,9 @@ public abstract class Card implements StatusControl {
         return active;
     }
 
-    public Card(String number) {
+    public Card(String number, boolean active) {
         this.number = number;
+        this.active = active;
     }
     
     @Override

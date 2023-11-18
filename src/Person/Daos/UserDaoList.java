@@ -22,6 +22,7 @@ public class UserDaoList implements Dao<UserDto> {
         return instance;
     }
 
+    @Override
     public boolean create(UserDto user) {
         if (user == null) {
             return false;
@@ -30,18 +31,22 @@ public class UserDaoList implements Dao<UserDto> {
         return true;
     }
 
+    @Override
     public UserDto read(String id) {
         return userList.get(id);
     }
 
+    @Override
     public List<UserDto> readAll() {
         return new ArrayList<>(userList.values());
     }
 
+    @Override
     public boolean update(UserDto user) {
         return this.create(user);
     }
 
+    @Override
     public boolean delete(UserDto user) {
         return userList.remove(user.getId()) != null;
     }

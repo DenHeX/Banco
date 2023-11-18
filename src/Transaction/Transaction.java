@@ -11,17 +11,21 @@ import java.util.Date;
  *
  * @author rsand
  */
-public abstract class Transaction {
+public abstract class Transaction implements Cloneable {
     private double amount;
     private Account source;
-    private Date date;
+    Date date;
 
     public Transaction(double amount, Account source) {
         this.amount = amount;
         this.source = source;
         this.date = date;
     }
-
+    public Transaction(double amount, Account source, Date date) {
+        this.amount = amount;
+        this.source = source;
+        this.date = date;
+    }
     public double getAmount() {
         return amount;
     }
@@ -35,4 +39,25 @@ public abstract class Transaction {
     }
     public abstract boolean execute();
    
+// Método para crear un clon de la transacción utilizando el patrón Prototype
+    public Transaction cloneTransaction() {
+        try {
+            return (Transaction) this.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    // Método para guardar el estado de la transacción
+    public Transaction saveToMemento() {
+        return this.cloneTransaction();
+    }
+
+    // Método para restaurar el estado de la transacción desde un Memento
+    public void restoreFromMemento(Transaction memento) {
+        this.amount = memento.getAmount();
+        this.source = memento.getSource();
+        this.date = memento.getDate();
+    }
 }
