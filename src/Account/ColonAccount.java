@@ -13,6 +13,7 @@ public class ColonAccount extends Account {
     public ColonAccount(String number, Customer customer) {
         super(number, customer);
     }
+    @Override
     public boolean transfer(Account destination, double amount) {
         if (destination instanceof DollarAccount) {
             double exchangeRate = DollarAccount.getExchangeRate();

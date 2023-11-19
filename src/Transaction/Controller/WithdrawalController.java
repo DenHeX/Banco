@@ -7,49 +7,51 @@ package Transaction.Controller;
 import Controller.Controller;
 import Dao.Dao;
 import Transaction.Transaction;
+import Transaction.Transfer;
+import Transaction.Withdrawal;
+import Transaction.Withdrawal;
 import Views.View;
 import java.util.List;
 
 /**
  *
- * @author rsand
+ * @author ´Felipe Chacón
  */
-public class DepositController implements Controller<Transaction>{
+public class WithdrawalController implements Controller <Withdrawal> {
     private View view;
     private Dao dao;
 
-    public DepositController(View view, Dao dao) {
+    public WithdrawalController(View view, Dao dao) {
         this.view = view;
         this.dao = dao;
     }
-
+    
     @Override
-    public boolean create(Transaction obj) {
-    if (dao.create(obj)) {
-            view.displayMessage("Depósito registrado con éxito.");
+    public boolean create(Withdrawal obj) {
+       if (dao.create(obj)) {
+            view.displayMessage("Retiro registrado con éxito.");
             return true;
         } else {
-            view.displayMessage("Error al registrar el depósito.");
+            view.displayMessage("Error al registrar el retiro.");
             return false;
-        }    
+        }     
     }
 
     @Override
-    public Transaction read(String id) {
-        Transaction transaction = (Transaction) dao.read(id);
+    public Withdrawal read(String id) {
+        Withdrawal transaction = (Withdrawal) dao.read(id);
 
         if (transaction == null) {
             view.displayMessage("Transacción no encontrada.");
         } else {
             view.display(transaction);
         }
-
-        return transaction;    
+        return transaction;
     }
 
     @Override
-    public List<Transaction> readAll() {
-        List<Transaction> transactions = dao.readAll();
+    public List<Withdrawal> readAll() {
+        List<Withdrawal> transactions = dao.readAll();
 
         if (!transactions.isEmpty()) {
             for (Transaction transaction : transactions) {
@@ -59,20 +61,22 @@ public class DepositController implements Controller<Transaction>{
         } else {
             view.displayMessage("No hay transacciones disponibles.");
             return null;
-        }    }
+        } 
+    }
 
     @Override
-    public boolean update(Transaction obj) {
+    public boolean update(Withdrawal obj) {
         if (dao.update(obj)) {
             view.displayMessage("Transacción actualizada con éxito.");
             return true;
         } else {
             view.displayMessage("Error al actualizar la transacción.");
             return false;
-        }    }
+        } 
+    }
 
     @Override
-    public boolean delete(Transaction obj) {
+    public boolean delete(Withdrawal obj) {
         if (dao.delete(obj)) {
             view.displayMessage("Transacción eliminada con éxito.");
             return true;
@@ -80,5 +84,7 @@ public class DepositController implements Controller<Transaction>{
             view.displayMessage("Error al eliminar la transacción.");
             return false;
         }
-    }    
-}
+    }
+    
+    }
+    

@@ -5,8 +5,8 @@ public class CreditCard extends Card{
     private double creditLimit;
     private static double interestRate;
 
-    public CreditCard(String number) {
-        super(number);
+    public CreditCard(String number, double balance, double creditLimit, double interestRate, boolean active) {
+        super(number, active);
         this.balance = balance;
         this.creditLimit = creditLimit;
         this.interestRate = getInterestRate();
@@ -23,7 +23,6 @@ public class CreditCard extends Card{
     public static double getInterestRate() {
         return interestRate;
     }
-    
     
     @Override
     public boolean MakePurchase(double amount){
