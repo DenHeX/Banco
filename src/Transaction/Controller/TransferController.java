@@ -8,7 +8,8 @@ import Transaction.Transfer;
 import Views.View;
 import java.util.List;
 
-public class TransferController implements Controller<Transfer>{
+public class TransferController implements Controller<Transfer> {
+
     private View view;
     private Dao dao;
 
@@ -25,7 +26,7 @@ public class TransferController implements Controller<Transfer>{
         } else {
             view.displayMessage("Error al registrar el depósito.");
             return false;
-        }    
+        }
     }
 
     @Override
@@ -52,7 +53,7 @@ public class TransferController implements Controller<Transfer>{
         } else {
             view.displayMessage("No hay transacciones disponibles.");
             return null;
-        } 
+        }
     }
 
     @Override
@@ -63,7 +64,7 @@ public class TransferController implements Controller<Transfer>{
         } else {
             view.displayMessage("Error al actualizar la transacción.");
             return false;
-        } 
+        }
     }
 
     @Override
@@ -75,6 +76,7 @@ public class TransferController implements Controller<Transfer>{
             view.displayMessage("Error al eliminar la transacción.");
             return false;
         }
-    }    
+
+    }
 
 }

@@ -6,14 +6,14 @@ package Recursividad;
 
 import Account.Account;
 import Account.Dtos.AccountDto;
+import Person.Dtos.CustomerDto;
+import Transaction.Dtos.TransferDto;
 import Transaction.Transfer;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- *
- * @author ´Felipe Chacón
- */
 public class TransferTracker {
-    
+
     public static void main(String[] args) {
         List<Transfer> transfers = new ArrayList<>();
 
@@ -27,32 +27,41 @@ public class TransferTracker {
         }
     }
 
-    public void trackTransfers(TransferDto transfer) {
-        AccountDto sourceAccount = accountDao.read(transfer.getSource());
-        AccountDto destinationAccount = accountDao.read(transfer.getDestination());
+    public static List<Transfer> trackCrossCustomerTransfers(List<Transfer> transfers) {
+        List<Transfer> crossCustomerTransfers = new ArrayList<>();
+        for (Transfer transfer : transfers) {
+            trackTransfers(transfer, crossCustomerTransfers);
+        }
+        return crossCustomerTransfers;
+    }
 
-        CustomerDto sourceCustomer = customerDao.read(sourceAccount.getCustomer());
-        CustomerDto destinationCustomer = customerDao.read(destinationAccount.getCustomer());
+    public static void trackTransfers(Transfer transfer, List<Transfer> crossCustomerTransfers) {
+        Account sourceAccount = transfer.getSourceAccount();
+        Account destinationAccount = transfer.getDestinationAccount();
+
+        Customer sourceCustomer = sourceAccount.getCustomer();
+        Customer destinationCustomer = destinationAccount.getCustomer();
 
         if (!sourceCustomer.getId().equals(destinationCustomer.getId())) {
+            crossCustomerTransfers.add(transfer);
             System.out.println("Transferencia encontrada entre cuentas de diferentes clientes:");
             System.out.println("Transfer ID: " + transfer.getId());
             System.out.println("Origen: " + sourceCustomer.getName() + " - Cuenta: " + sourceAccount.getNumber());
             System.out.println("Destino: " + destinationCustomer.getName() + " - Cuenta: " + destinationAccount.getNumber());
             System.out.println("Monto: " + transfer.getAmount());
         }
-        
+
         // Llamada recursiva para seguir rastreando transferencias
-        // Dependiendo de cómo esté implementada tu lógica, necesitarás modificar esta parte
         List<TransferDto> nextTransfers = getNextTransfers(transfer);
         for (TransferDto nextTransfer : nextTransfers) {
-            trackTransfers(nextTransfer);
+            trackTransfers(nextTransfer, crossCustomerTransfers);
         }
     }
 
     // Método para obtener las siguientes transferencias relacionadas a una transferencia dada
-    public List<TransferDto> getNextTransfers(TransferDto transfer) {
+    public static List<TransferDto> getNextTransfers(TransferDto transfer) {
         // Lógica para obtener las siguientes transferencias basadas en la transferencia actual
         // ...
+        return new ArrayList<>();
     }
 }

@@ -10,20 +10,22 @@ import java.util.ArrayList;
  *
  * @author ´Felipe Chacón
  */
-public class TransferDaoList implements DaoListTransaction <TransferDto> {
-        
-    private HashMap <String, TransferDto> transferlist;
+public class TransferDaoList implements DaoListTransaction<TransferDto> {
+
+    private HashMap<String, TransferDto> transferlist;
     private static TransferDaoList instance;
 
     public TransferDaoList() {
         this.transferlist = new HashMap();
     }
-    public static TransferDaoList getInstance(){
-        if(instance == null){
+
+    public static TransferDaoList getInstance() {
+        if (instance == null) {
             instance = new TransferDaoList();
         }
         return instance;
     }
+
     @Override
     public boolean create(TransferDto transfer) {
         if (transferlist == null) {

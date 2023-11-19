@@ -7,19 +7,16 @@ package Transaction;
 import Account.Account;
 import java.util.Date;
 
-/**
- *
- * @author rsand
- */
-public class Withdrawal extends Transaction {
+public class Withdrawal extends Transaction implements Cloneable {
+
     private double amount;
     private Account source;
     private Date date;
-    
-    
+
     public Withdrawal(double amount, Account source) {
         super(amount, source);
     }
+
     public Withdrawal(double amount, Account source, Date date) {
         super(amount, source, date);
     }
@@ -38,13 +35,14 @@ public class Withdrawal extends Transaction {
     public Date getDate() {
         return date;
     }
-    
+
     @Override
-    public boolean execute(){
+    public boolean execute() {
+        // Your withdrawal execution logic goes here
         return true;
     }
-    
-    // Método para crear un clon del retiro utilizando el patrón Prototype
+
+    // Method to create a clone of the withdrawal using the Prototype pattern
     @Override
     public Withdrawal clone() {
         try {
@@ -55,17 +53,16 @@ public class Withdrawal extends Transaction {
         }
     }
 
-    // Método para guardar el estado de la retirada utilizando el patrón Memento
+    // Method to save the state of the withdrawal using the Memento pattern
     @Override
     public Withdrawal saveToMemento() {
         return this.clone();
     }
 
-    // Método para restaurar el estado de la retirada desde un Memento
+    // Method to restore the state of the withdrawal from a Memento
     public void restoreFromMemento(Withdrawal memento) {
-    this.amount = memento.getAmount();
-    this.source = memento.getSource();
-    this.date = memento.getDate();
+        this.amount = memento.getAmount();
+        this.source = memento.getSource();
+        this.date = memento.getDate();
     }
 }
-
