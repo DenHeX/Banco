@@ -409,12 +409,12 @@ public class FrmCustomer extends javax.swing.JInternalFrame implements View<Cust
     }
 
     @Override
-    public void displayMessage(String msg) {
+    public void display(Customer obj) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void display(Customer obj) {
+    public void displayMessage(String message) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

@@ -4,14 +4,17 @@ import Controller.Controller;
 import Dao.Dao;
 import Person.Dtos.UserDto;
 import Person.User;
+import Views.UserObservable;
+import Views.Users.UserObserver;
 import Views.View;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserController implements Controller<User> {
+public class UserController implements Controller<User>, UserObservable {
 
     private View view;
     private Dao dao;
+    private List<UserObserver> observers = new ArrayList<>();
 
     public UserController(View view, Dao dao) {
         this.view = view;
@@ -27,6 +30,7 @@ public class UserController implements Controller<User> {
             UserDto userDto = new UserDto(user.getId(), user.getName(), user.getUsername(), user.getPassword());
             if (dao.create(userDto)) {
                 view.displayMessage("Usuario agregado correctamente");
+                notifyObservers(user); // Mover esta línea antes del return
                 return true;
             } else {
                 view.displayMessage("Error al agregar usuario");
@@ -91,6 +95,23 @@ public class UserController implements Controller<User> {
                 view.displayMessage("Error al eliminar usuario");
                 return false;
             }
+        }
+    }
+
+    @Override
+    public void addObserver(UserObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(UserObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers(User user) {
+        for (UserObserver observer : observers) {
+            observer.update(user);
         }
     }
 }

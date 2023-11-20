@@ -4,17 +4,36 @@
  */
 package Views.Users;
 
+import Person.Controller.UserController;
+import Person.User;
+import Views.Table;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ´Felipe Chacón
  */
-public class UserBuscar extends javax.swing.JInternalFrame {
+public class FrmUserSearch extends javax.swing.JInternalFrame {
+
+    private FrmUser frmUser;
+    private UserController controller;
+    private User user;
 
     /**
      * Creates new form UserBuscar
      */
-    public UserBuscar() {
+    public FrmUserSearch() {
         initComponents();
+    }
+
+    public void clear() {
+        frmUser.txtId.setText("");
+        frmUser.txtName.setText("");
+        frmUser.txtUsername.setText("");
+        frmUser.txtPassword.setText("");
+        frmUser.txtConfirmPassword.setText("");
     }
 
     /**
@@ -29,21 +48,17 @@ public class UserBuscar extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         txtFiltro = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        tblUsers = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblUsers = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         btnCancelar = new javax.swing.JButton();
         btnListo = new javax.swing.JButton();
 
         setTitle("Search Users");
-        setFrameIcon(new javax.swing.ImageIcon("C:\\Users\\´Felipe Chacón\\OneDrive\\Escritorio\\II CUATRIMESTRE UTN\\Programacion I\\Icons\\32\\Png\\user (4).png")); // NOI18N
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/ICON/user-interface.png"))); // NOI18N
 
         txtFiltro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtFiltro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFiltroActionPerformed(evt);
-            }
-        });
+        txtFiltro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtFiltroKeyReleased(evt);
@@ -71,7 +86,12 @@ public class UserBuscar extends javax.swing.JInternalFrame {
                     .addContainerGap(7, Short.MAX_VALUE)))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jPanel2.setForeground(new java.awt.Color(204, 204, 255));
+
+        jScrollPane1.setForeground(new java.awt.Color(102, 102, 255));
+        jScrollPane1.setViewportBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 102, 255)));
+
+        tblUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -79,7 +99,7 @@ public class UserBuscar extends javax.swing.JInternalFrame {
                 {null, null, null}
             },
             new String [] {
-                "Id", "Nombre", "UserName"
+                "Id", "Name", "Username"
             }
         ) {
             Class[] types = new Class [] {
@@ -90,29 +110,53 @@ public class UserBuscar extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
-        tblUsers.setViewportView(jTable1);
+        tblUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUsersMouseClicked(evt);
+            }
+        });
+        tblUsers.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblUsersKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblUsers);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tblUsers)
+            .addComponent(jScrollPane1)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tblUsers, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
         );
 
-        btnCancelar.setIcon(new javax.swing.ImageIcon("C:\\Users\\´Felipe Chacón\\OneDrive\\Escritorio\\II CUATRIMESTRE UTN\\Programacion I\\Icons\\32\\Png\\dialog_cancel (3).png")); // NOI18N
+        jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
 
-        btnListo.setIcon(new javax.swing.ImageIcon("C:\\Users\\´Felipe Chacón\\OneDrive\\Escritorio\\II CUATRIMESTRE UTN\\Programacion I\\Icons\\32\\Png\\checkmark_korganizer (3).png")); // NOI18N
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/ICON/cancelar.png"))); // NOI18N
+        btnCancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        btnListo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/ICON/comprobado.png"))); // NOI18N
+        btnListo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnListo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(170, Short.MAX_VALUE)
+                .addContainerGap(164, Short.MAX_VALUE)
                 .addComponent(btnListo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -125,7 +169,7 @@ public class UserBuscar extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnListo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -146,16 +190,42 @@ public class UserBuscar extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        getAccessibleContext().setAccessibleName("SearchUsers");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtFiltroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyReleased
-        Table.filter(this.tblEmpleados, txtFiltro.getText());
+        Table.filter(tblUsers, txtFiltro.getText());
     }//GEN-LAST:event_txtFiltroKeyReleased
 
-    private void txtFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFiltroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFiltroActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnListoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListoActionPerformed
+        int row = tblUsers.getSelectedRow();
+        Object identificacion = tblUsers.getValueAt(row, 0);
+        controller.read(identificacion.toString());
+    }//GEN-LAST:event_btnListoActionPerformed
+
+    private void tblUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsersMouseClicked
+        if (evt.getClickCount() == 2) {
+            int row = tblUsers.getSelectedRow();
+            Object identificacion = tblUsers.getValueAt(row, 0);
+            controller.read(identificacion.toString());
+        }
+    }//GEN-LAST:event_tblUsersMouseClicked
+
+    private void tblUsersKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblUsersKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            int row = tblUsers.getSelectedRow();
+            if (row > -1) {
+                Object identificacion = tblUsers.getValueAt(row, 0);
+                controller.delete(new User(identificacion.toString(), "", "", 0));
+            }
+        }
+    }//GEN-LAST:event_tblUsersKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -164,8 +234,8 @@ public class UserBuscar extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JScrollPane tblUsers;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblUsers;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }
