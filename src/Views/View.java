@@ -1,5 +1,6 @@
 package Views;
 
+import java.lang.ProcessBuilder.Redirect.Type;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -20,7 +21,12 @@ public interface View<Class> {
  desk.add(frm);
  frm.setVisible(true);
  }
-    public void display(Class obj);
-    public void displayMessage(String msg);
+ 
+ public void clear();
+ public void display(Type regs);
+ public void displayAll(Type[] regs);
+ public void displayMessaje(String msj);
+ public boolean displayConfirmMessaje(String msj);
+ public void displayErrorMessaje(String msj);
 
 }
