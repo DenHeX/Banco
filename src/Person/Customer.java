@@ -1,8 +1,12 @@
 package Person;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
-import java.sql.Date;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Customer extends Person {
 
@@ -11,9 +15,14 @@ public class Customer extends Person {
     private String email;
     private String address;
 
-    public Customer(String id, String name, Date dateOfBirth, String phone, String email, String address) {
+    public Customer(String id, String name, String dateOfBirth, String phone, String email, String address) {
         super(id, name);
-        this.dateOfBirth = dateOfBirth;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            this.dateOfBirth = new Date(dateFormat.parse(dateOfBirth).getTime());
+        } catch (ParseException ex) {
+            Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -58,6 +67,9 @@ public class Customer extends Person {
     public int getAge() {
         return calculateAge();
     }
+    public void setDateOfBirth(Date dateOfBirth) {
+    this.dateOfBirth = dateOfBirth;
+}
 
     private int calculateAge() {
         LocalDate birthDate = dateOfBirth.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
@@ -65,6 +77,7 @@ public class Customer extends Person {
         return Period.between(birthDate, currentDate).getYears();
     }
 }
+
 
 
 

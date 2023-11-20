@@ -4,12 +4,9 @@
  */
 package Views;
 
-import Views.Users.FrmUser;
-import Views.View;
-
 /**
  *
- * @author ´Felipe Chacón
+ * @author rsand
  */
 public class FrmMenu extends javax.swing.JFrame {
 
@@ -19,7 +16,6 @@ public class FrmMenu extends javax.swing.JFrame {
     public FrmMenu() {
         initComponents();
         View.maximize(this);
-        //Cargar datos utilizando clase Data.
     }
 
     /**
@@ -34,7 +30,11 @@ public class FrmMenu extends javax.swing.JFrame {
         desktopMenu = new javax.swing.JDesktopPane();
         menu = new javax.swing.JMenuBar();
         menuManage = new javax.swing.JMenu();
-        menuUsers = new javax.swing.JMenuItem();
+        menuHabitaciones = new javax.swing.JMenuItem();
+        menuEmpleados = new javax.swing.JMenuItem();
+        menuClientes = new javax.swing.JMenuItem();
+        menuServicio = new javax.swing.JMenuItem();
+        menuReservas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,11 +42,11 @@ public class FrmMenu extends javax.swing.JFrame {
         desktopMenu.setLayout(desktopMenuLayout);
         desktopMenuLayout.setHorizontalGroup(
             desktopMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 910, Short.MAX_VALUE)
+            .addGap(0, 1005, Short.MAX_VALUE)
         );
         desktopMenuLayout.setVerticalGroup(
             desktopMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
+            .addGap(0, 535, Short.MAX_VALUE)
         );
 
         menu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -54,15 +54,55 @@ public class FrmMenu extends javax.swing.JFrame {
         menuManage.setText("Administrar");
         menuManage.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        menuUsers.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        menuUsers.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        menuUsers.setText("User");
-        menuUsers.addActionListener(new java.awt.event.ActionListener() {
+        menuHabitaciones.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menuHabitaciones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menuHabitaciones.setText("Habitaciones");
+        menuHabitaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuUsersActionPerformed(evt);
+                menuHabitacionesActionPerformed(evt);
             }
         });
-        menuManage.add(menuUsers);
+        menuManage.add(menuHabitaciones);
+
+        menuEmpleados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menuEmpleados.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menuEmpleados.setText("Empleados");
+        menuEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEmpleadosActionPerformed(evt);
+            }
+        });
+        menuManage.add(menuEmpleados);
+
+        menuClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menuClientes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menuClientes.setText("Clientes");
+        menuClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuClientesActionPerformed(evt);
+            }
+        });
+        menuManage.add(menuClientes);
+
+        menuServicio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menuServicio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menuServicio.setText("Servicio");
+        menuServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuServicioActionPerformed(evt);
+            }
+        });
+        menuManage.add(menuServicio);
+
+        menuReservas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menuReservas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menuReservas.setText("Reservas");
+        menuReservas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuReservasActionPerformed(evt);
+            }
+        });
+        menuManage.add(menuReservas);
 
         menu.add(menuManage);
 
@@ -72,22 +112,36 @@ public class FrmMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(desktopMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(desktopMenu)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopMenu)
+            .addComponent(desktopMenu, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUsersActionPerformed
-        FrmUser frm = new FrmUser();
+    private void menuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuClientesActionPerformed
+        FrmCustomer frm = new FrmCustomer();
         View.showInternal(desktopMenu, frm);
-    }//GEN-LAST:event_menuUsersActionPerformed
+    }//GEN-LAST:event_menuClientesActionPerformed
+
+    private void menuEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEmpleadosActionPerformed
+      
+    }//GEN-LAST:event_menuEmpleadosActionPerformed
+
+    private void menuHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuHabitacionesActionPerformed
+       
+    }//GEN-LAST:event_menuHabitacionesActionPerformed
+
+    private void menuServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuServicioActionPerformed
+        
+    }//GEN-LAST:event_menuServicioActionPerformed
+
+    private void menuReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuReservasActionPerformed
+        
+    }//GEN-LAST:event_menuReservasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,10 +169,24 @@ public class FrmMenu extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
             public void run() {
                 new FrmMenu().setVisible(true);
             }
@@ -128,7 +196,11 @@ public class FrmMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane desktopMenu;
     private javax.swing.JMenuBar menu;
+    private javax.swing.JMenuItem menuClientes;
+    private javax.swing.JMenuItem menuEmpleados;
+    private javax.swing.JMenuItem menuHabitaciones;
     private javax.swing.JMenu menuManage;
-    private javax.swing.JMenuItem menuUsers;
+    private javax.swing.JMenuItem menuReservas;
+    private javax.swing.JMenuItem menuServicio;
     // End of variables declaration//GEN-END:variables
 }

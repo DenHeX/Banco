@@ -21,9 +21,4 @@ public interface View<Class> {
         desk.add(frm);
         frm.setVisible(true);
     }
-
-    public void display(Class obj);
-
-    public void displayMessage(String msg);
-
 }
