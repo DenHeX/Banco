@@ -44,7 +44,8 @@ public class DepositController implements Controller<Transaction>{
             view.display(transaction);
         }
 
-        return transaction;    }
+        return transaction;    
+    }
 
     @Override
     public List<Transaction> readAll() {
@@ -72,7 +73,7 @@ public class DepositController implements Controller<Transaction>{
 
     @Override
     public boolean delete(Transaction obj) {
-if (dao.delete(obj)) {
+        if (dao.delete(obj)) {
             view.displayMessage("Transacción eliminada con éxito.");
             return true;
         } else {

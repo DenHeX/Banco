@@ -20,6 +20,7 @@ public class CustomerDaoList implements Dao<CustomerDto> {
         }
         return instance;
     }
+    @Override
     public boolean create(CustomerDto customer) {
         if (customer == null) {
             return false;
@@ -28,18 +29,22 @@ public class CustomerDaoList implements Dao<CustomerDto> {
         return true;
     }
 
+    @Override
     public CustomerDto read(String id) {
         return customerList.get(id);
     }
 
+    @Override
     public List<CustomerDto> readAll() {
         return new ArrayList<>(customerList.values());
     }
 
+    @Override
     public boolean update(CustomerDto customer) {
         return this.create(customer);
     }
 
+    @Override
     public boolean delete(CustomerDto customer) {
         return customerList.remove(customer.getId()) != null;
     }

@@ -17,7 +17,8 @@ import java.util.List;
  *
  * @author ´Felipe Chacón
  */
-public class WithdrawalController implements Controller <Withdrawal> {
+public class WithdrawalController implements Controller<Withdrawal> {
+
     private View view;
     private Dao dao;
 
@@ -25,16 +26,16 @@ public class WithdrawalController implements Controller <Withdrawal> {
         this.view = view;
         this.dao = dao;
     }
-    
+
     @Override
     public boolean create(Withdrawal obj) {
-       if (dao.create(obj)) {
+        if (dao.create(obj)) {
             view.displayMessage("Retiro registrado con éxito.");
             return true;
         } else {
             view.displayMessage("Error al registrar el retiro.");
             return false;
-        }     
+        }
     }
 
     @Override
@@ -61,7 +62,7 @@ public class WithdrawalController implements Controller <Withdrawal> {
         } else {
             view.displayMessage("No hay transacciones disponibles.");
             return null;
-        } 
+        }
     }
 
     @Override
@@ -72,7 +73,7 @@ public class WithdrawalController implements Controller <Withdrawal> {
         } else {
             view.displayMessage("Error al actualizar la transacción.");
             return false;
-        } 
+        }
     }
 
     @Override
@@ -85,4 +86,5 @@ public class WithdrawalController implements Controller <Withdrawal> {
             return false;
         }
     }
+
 }

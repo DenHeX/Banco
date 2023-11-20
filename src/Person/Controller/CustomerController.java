@@ -7,7 +7,6 @@ import Person.Dtos.CustomerDto;
 import Views.View;
 import java.sql.Date;
 import java.util.ArrayList;
-
 import java.util.List;
 
 public class CustomerController implements Controller<Customer> {
@@ -22,7 +21,14 @@ public class CustomerController implements Controller<Customer> {
 
     @Override
     public boolean create(Customer customer) {
-        CustomerDto customerDto = new CustomerDto(customer.getId(), customer.getName(), customer.getDateOfBirth(), customer.getPhone(), customer.getEmail(), customer.getAddress());
+        CustomerDto customerDto = new CustomerDto(
+            customer.getId(),
+            customer.getName(),
+            customer.getDateOfBirth(),
+            customer.getPhone(),
+            customer.getEmail(),
+            customer.getAddress()
+        );
 
         if (dao.create(customerDto)) {
             view.displayMessage("Cliente agregado correctamente");
@@ -36,10 +42,18 @@ public class CustomerController implements Controller<Customer> {
     @Override
     public Customer read(String id) {
         CustomerDto customerDto = (CustomerDto) dao.read(id);
+
         if (customerDto == null) {
             view.displayMessage("Cliente no encontrado");
         } else {
-            Customer customer = new Customer(customerDto.getId(), customerDto.getName(), (Date) customerDto.getDateOfBirth(), customerDto.getPhone(), customerDto.getEmail(), customerDto.getAddress());
+            Customer customer = new Customer(
+                customerDto.getId(),
+                customerDto.getName(),
+                (Date) customerDto.getDateOfBirth(),
+                customerDto.getPhone(),
+                customerDto.getEmail(),
+                customerDto.getAddress()
+            );
             view.display(customer);
             return customer;
         }
@@ -52,7 +66,14 @@ public class CustomerController implements Controller<Customer> {
         List<CustomerDto> customerDtos = dao.readAll();
 
         for (CustomerDto customerDto : customerDtos) {
-            Customer customer = new Customer(customerDto.getId(), customerDto.getName(), (Date) customerDto.getDateOfBirth(), customerDto.getPhone(), customerDto.getEmail(), customerDto.getAddress());
+            Customer customer = new Customer(
+                customerDto.getId(),
+                customerDto.getName(),
+                (Date) customerDto.getDateOfBirth(),
+                customerDto.getPhone(),
+                customerDto.getEmail(),
+                customerDto.getAddress()
+            );
             customers.add(customer);
         }
 
@@ -65,7 +86,15 @@ public class CustomerController implements Controller<Customer> {
             view.displayMessage("Cliente no encontrado");
             return false;
         } else {
-            CustomerDto customerDto = new CustomerDto(customer.getId(), customer.getName(), customer.getDateOfBirth(), customer.getPhone(), customer.getEmail(), customer.getAddress());
+            CustomerDto customerDto = new CustomerDto(
+                customer.getId(),
+                customer.getName(),
+                customer.getDateOfBirth(),
+                customer.getPhone(),
+                customer.getEmail(),
+                customer.getAddress()
+            );
+
             if (dao.update(customerDto)) {
                 view.displayMessage("Cliente actualizado correctamente");
                 return true;

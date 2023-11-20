@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * DebitCardDaoList class for handling DebitCardDto objects using an in-memory list.
+ * Author: Felipe Chacón
+ */
 public class DebitCardDaoList implements Dao<DebitCardDto> {
 
     private HashMap<String, DebitCardDto> debitCardList;
@@ -61,3 +65,4 @@ public class DebitCardDaoList implements Dao<DebitCardDto> {
         return debitCardList.get(number);
     }
 }
+

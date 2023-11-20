@@ -1,3 +1,8 @@
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Card.Controller;
 
 import Card.CreditCard;
@@ -7,15 +12,15 @@ import Views.View;
 import java.util.List;
 
 /**
- *
- * @author ´Felipe Chacón
+ * CreditCardController class for handling CreditCard objects in the system.
+ * Author: Felipe Chacón
  */
 public class CreditCardController implements Controller<CreditCard> {
-    
-    private View view;
-    private Dao dao;
 
-    public CreditCardController(View view, Dao dao) {
+    private View view;
+    private Dao<CreditCard> dao;
+
+    public CreditCardController(View view, Dao<CreditCard> dao) {
         this.view = view;
         this.dao = dao;
     }
@@ -42,7 +47,7 @@ public class CreditCardController implements Controller<CreditCard> {
 
     @Override
     public CreditCard read(String id) {
-        CreditCard creditCard = (CreditCard) dao.read(id);
+        CreditCard creditCard = dao.read(id);
 
         if (creditCard == null) {
             view.displayMessage("Tarjeta de crédito no encontrada.");
@@ -81,7 +86,7 @@ public class CreditCardController implements Controller<CreditCard> {
 
     @Override
     public boolean delete(CreditCard obj) {
-     if (dao.delete(obj)) {
+        if (dao.delete(obj)) {
             view.displayMessage("Tarjeta de crédito eliminada con éxito.");
             return true;
         } else {
